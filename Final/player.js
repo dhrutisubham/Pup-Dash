@@ -1,5 +1,5 @@
 /** @type {HTMLCanvasElement} */
-import { Sitting, Running, Jumping, Falling } from './playerStates.js' 
+import { Sitting, Running, Jumping, Falling, Rolling } from './playerStates.js' 
 
 export class Player{
     constructor(game){
@@ -24,7 +24,7 @@ export class Player{
         this.vSpeed=0;
         this.mass=1;
 
-        this.states=[new Sitting(this), new Running(this), new Jumping(this), new Falling(this)];
+        this.states=[new Sitting(this), new Running(this), new Jumping(this), new Falling(this), new Rolling(this)];
         this.currentState=this.states[0];
         this.currentState.enter();
 

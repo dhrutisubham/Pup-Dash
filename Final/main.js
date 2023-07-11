@@ -1,7 +1,7 @@
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./background.js";
-import { FlyingEnemy, GroundEnemy } from "./enemies.js";
+import { ClimbingEnemy, FlyingEnemy, GroundEnemy} from "./enemies.js";
 
 /**@type {HTMLCanvasElement} */
 
@@ -54,11 +54,16 @@ window.addEventListener('load', function(){
             this.player.draw(context);
             this.enemies.forEach(enemy=>{
                 enemy.draw(context);
-            })
+            });
         }
         addEnemy(){
-            if(this.speed>0 && Math.random()>0.6 && this.enemies.length<3) this.enemies.push(new GroundEnemy(this));
+            if(this.speed>0 && Math.random()>0.5 && this.enemies.length<10) this.enemies.push(new GroundEnemy(this));
+            else if(this.speed>0){
+                this.enemies.push(new ClimbingEnemy(this));
+            }
+            
             this.enemies.push(new FlyingEnemy(this));
+            console.log(this.enemies);
         }
     }
     const game=new Game(canvas.width, canvas.height);

@@ -22,7 +22,7 @@ class Enemy{
 
     }
     draw(context){
-        context.drawImage(this.image, this.frameX*this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.frameX*this.width, 0, this.width, this.height, this.x, this.y, this.width*this.size, this.height*this.size);
     }
 }
 
@@ -38,6 +38,7 @@ export class FlyingEnemy extends Enemy{
         this.speedY=0;
         this.maxFrame=6;
         this.image=enemyFly;
+        this.size=1;
 
         this.angle=0;
     }
@@ -63,10 +64,47 @@ export class GroundEnemy extends Enemy{
         this.speedX=0;
         this.speedY=0;
         this.maxFrame=2;
-
+        this.size=1;
+    }
+    update(deltaTime){
+        super.update(deltaTime);
+    }
+    draw(context){
+        super.draw(context);
     }
 }
 
 export class ClimbingEnemy extends Enemy{
+    constructor(game){
+        super();
+        this.game=game;
+        this.size=0.5+Math.random()*0.5;
+        this.width=120;
+        this.height=144;
+        this.x=this.game.width;
+        this.y=Math.random()*this.game.height*0.5;
+        this.image=enemyBigSpider;
+        this.speedX=0;
+        this.speedY=(Math.random()>0.5)? 1:-1;
+        this.maxFrame=6;
+        this.size=0.5+0.5*Math.random();
+    }
+    update(deltaTime){
+        super.update(deltaTime);
+        this.y-=this.speedY;
+        if(this.y>this.game.height-this.game.groundMargin-this.height+10){
+            this.speedY*=-1;
+        }
+        if(this.y+this.height<0) this.markedForDeletion=true;
+
+    }
+    draw(context){
+        super.draw(context);
+        context.fillStyle='white';
+        context.beginPath();
+        context.moveTo(this.x+this.size*this.width/2, 0);
+        context.lineTo(this.x+this.size*this.width/2, this.y+50);
+        context.stroke();
+    }
 
 }

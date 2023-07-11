@@ -7,13 +7,13 @@ export class Player{
         this.width=100;
         this.height=91.3;
         this.x=0;
-        this.y=this.game.height-this.height;
+        this.y=this.game.height-this.height-this.game.groundMargin;
 
         this.image=document.getElementById('player');
         this.frameX=0;
         this.frameY=0;
         this.maxFrame=5;
-        this.fps=20;
+        this.fps=24.49;
         this.frameInterval=1000/this.fps;
         this.frameTimer=0;
         
@@ -45,7 +45,7 @@ export class Player{
         //jumping
         this.y+=this.vSpeed;
         this.y=Math.max(this.y, 0);
-        this.y=Math.min(this.y, this.game.height-this.height);
+        this.y=Math.min(this.y, this.game.height-this.height-this.game.groundMargin);
 
         if(!this.onGround()) this.vSpeed+=this.mass;
 
@@ -65,7 +65,7 @@ export class Player{
 
     }
     onGround(){
-        return this.y>=this.game.height-this.height;
+        return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
         this.currentState=this.states[state];

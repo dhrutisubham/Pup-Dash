@@ -18,7 +18,8 @@ window.addEventListener('load', function(){
             this.bg=new Background(this);
             this.player=new Player(this);
             this.input=new InputHandler();
-            this.speed=3;
+            this.speed=0;
+            this.maxSpeed=3;
         }
 
         update(deltaTime){

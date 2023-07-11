@@ -39,8 +39,6 @@ export class Running extends State{
     }
     enter(){
         this.frameX=0;
-        // this.player.game.speed=3;
-
         this.player.frameY=3;
         this.player.maxFrame=9;
 

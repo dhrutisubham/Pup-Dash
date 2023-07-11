@@ -30,7 +30,7 @@ export class Player{
 
     }
     update(input, deltaTime){
-
+        this.checkCollision();
         this.currentState.handleInput(input);
 
         //running
@@ -44,7 +44,7 @@ export class Player{
 
         //jumping
         this.y+=this.vSpeed;
-        this.y=Math.max(this.y, 0);
+        this.y=Math.max(this.y, -30);
         this.y=Math.min(this.y, this.game.height-this.height-this.game.groundMargin);
 
         if(!this.onGround()) this.vSpeed+=this.mass;
@@ -61,6 +61,10 @@ export class Player{
     }
     draw(context){
 
+        if(this.game.debug){
+            context.strokeRect(this.x, this.y, this.width, this.height);
+        }
+
         context.drawImage(this.image, this.frameX*this.width, this.frameY*this.height, this.width, this.height, this.x, this.y, this.width, this.height);
 
     }
@@ -71,5 +75,22 @@ export class Player{
         this.currentState=this.states[state];
         this.game.speed=speed*this.game.maxSpeed;
         this.currentState.enter();
+    }
+
+    checkCollision(){
+        this.game.enemies.forEach(enemy => {
+            if(
+                enemy.x<this.x+this.width 
+                && enemy.x+enemy.width>this.x
+                && enemy.y<this.y+this.height 
+                && enemy.y+enemy.height>this.y                
+            ){
+                enemy.markedForDeletion=true;
+                this.game.score++;
+            }
+            else{
+
+            }
+        });
     }
 }

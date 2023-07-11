@@ -19,7 +19,7 @@ window.addEventListener('load', function(){
 
             this.bg=new Background(this);
             this.player=new Player(this);
-            this.input=new InputHandler();
+            this.input=new InputHandler(this);
 
             this.enemies=[];
             this.enemyTimer=0;
@@ -27,6 +27,12 @@ window.addEventListener('load', function(){
 
             this.speed=0;
             this.maxSpeed=3;
+
+            this.score=0;
+
+            this.debug=true;
+            
+
         }
 
         update(deltaTime){

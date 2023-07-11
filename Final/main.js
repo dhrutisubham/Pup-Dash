@@ -1,7 +1,7 @@
 import { Player } from "./player.js";
 import { InputHandler } from "./input.js";
 import { Background } from "./background.js";
-import { FlyingEnemy } from "./enemies.js";
+import { FlyingEnemy, GroundEnemy } from "./enemies.js";
 
 /**@type {HTMLCanvasElement} */
 
@@ -57,6 +57,7 @@ window.addEventListener('load', function(){
             })
         }
         addEnemy(){
+            if(this.speed>0 && Math.random()>0.6 && this.enemies.length<3) this.enemies.push(new GroundEnemy(this));
             this.enemies.push(new FlyingEnemy(this));
         }
     }

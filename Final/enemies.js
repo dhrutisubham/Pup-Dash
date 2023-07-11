@@ -10,11 +10,9 @@ class Enemy{
     }
     update(deltaTime){
         this.x-=this.speedX+this.game.speed;
-        this.y=Math.min(this.y+this.speedY, this.game.width*0.5);
-        this.speedY+=0.52;
         if(this.frameTimer>this.frameInterval){
             this.frameTimer=0;
-            this.frameX=(this.frameX+1)%6;
+            this.frameX=(this.frameX+1)%this.maxFrame;
         }
         else {this.frameTimer+=deltaTime;}
 
@@ -46,13 +44,27 @@ export class FlyingEnemy extends Enemy{
     update(deltaTime){
         super.update(deltaTime);
         this.speedY=(Math.random()*0.5+1)*Math.sin(this.angle);
+        this.y=Math.min(this.y+this.speedY, this.game.width*0.5);
+
         this.angle+=0.05;
 
     }
 }
 
 export class GroundEnemy extends Enemy{
+    constructor(game){
+        super();
+        this.game=game;
+        this.width=61;
+        this.height=87;
+        this.x=this.game.width;
+        this.y=this.game.height-this.game.groundMargin-this.height;
+        this.image=enemyPlant;
+        this.speedX=0;
+        this.speedY=0;
+        this.maxFrame=2;
 
+    }
 }
 
 export class ClimbingEnemy extends Enemy{

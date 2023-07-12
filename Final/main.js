@@ -19,10 +19,10 @@ window.addEventListener('load', function(){
             
             this.width=width;
             this.height=height;
-            this.groundMargin=80;
+            this.groundMargin=50;
 
             this.time=0;
-            this.maxTime=200000;
+            this.maxTime=20000;
             this.gameOver=false;
 
             this.enemies=[];
@@ -36,10 +36,12 @@ window.addEventListener('load', function(){
             this.maxSpeed=3;
 
             this.score=0;
-            this.fontColor='#000000DF';
+            this.fontColor='#FFFFFF';
 
             this.debug=false;
-            this.maxParticles=50;            
+            this.maxParticles=50;     
+            
+            this.totalLives=5;
 
             this.bg=new Background(this);
             this.player=new Player(this);
@@ -53,7 +55,6 @@ window.addEventListener('load', function(){
 
         update(deltaTime){
             this.time+=deltaTime;
-            console.log(this.time);
             if(this.time>this.maxTime) this.gameOver=true;
 
             this.bg.update();
@@ -93,9 +94,6 @@ window.addEventListener('load', function(){
                     this.collisions.splice(index,1);
                 }
             });
-            console.log(this.particles);
-            console.log(this.enemies);
-            console.log(this.collisions);
         }
         draw(context){
             this.bg.draw(context);

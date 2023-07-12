@@ -2,7 +2,6 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
-    font-family: 'Source Sans 3', sans-serif;
 }
 
 #canvas1{
@@ -14,8 +13,11 @@
 
     max-width: 100%;
     max-width: 100%;
+    font-family: 'Creepster', cursive;
+    font-family: 'Staatliches', cursive;
+
 }
 
-#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemyFly, #enemyPlant, #enemyBigSpider, #fire, #collision{
+#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemyFly, #enemyPlant, #enemyBigSpider, #fire, #collision, #lives{
     display: none;
 }

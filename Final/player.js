@@ -6,7 +6,7 @@ export class Player{
     constructor(game){
         this.game=game;
         this.width=100;
-        this.height=91.3;
+        this.height=91.5;
         this.x=0;
         this.y=this.game.height-this.height-this.game.groundMargin;
 
@@ -14,7 +14,7 @@ export class Player{
         this.frameX=0;
         this.frameY=0;
         this.maxFrame=5;
-        this.fps=24.49;
+        this.fps=20;
         this.frameInterval=1000/this.fps;
         this.frameTimer=0;
         
@@ -93,6 +93,12 @@ export class Player{
                     }
                     else{
                         this.setState(6, 0);
+                        
+                        this.game.totalLives--;
+                        if(!this.game.totalLives){
+                            this.game.gameOver=true;
+                        }
+                        
                     }
             }
         });

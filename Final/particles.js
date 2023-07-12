@@ -25,7 +25,7 @@ export class Dust extends Particle{
         this.y=y+this.game.player.height-this.size;
         this.speedX=Math.random()+1;
         this.speedY=Math.random()*2;
-        this.color='#00000040';
+        this.color='#74747440';
     }
     draw(context){
         context.beginPath();

@@ -36,6 +36,27 @@ export class Dust extends Particle{
 }
 
 export class Splash extends Particle{
+    constructor(game, x, y){
+        super(game);
+        this.game=game;
+        this.size=Math.random()*100+50;
+        this.x=x;
+        this.y=y;
+        this.speedX=Math.random()*6-3;
+        this.speedY=Math.random()*2+2;
+        this.mass=0;
+        this.image=fire;
+
+    }
+    update(){
+        super.update();
+        this.mass+=0.1;
+        this.y+=this.mass;
+    }
+    draw(context){
+        context.drawImage(this.image, this.x, this.y, this.size, this.size);
+
+    }
     
 }
 

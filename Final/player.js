@@ -1,5 +1,5 @@
 /** @type {HTMLCanvasElement} */
-import { Sitting, Running, Jumping, Falling, Rolling } from './playerStates.js' 
+import { Sitting, Running, Jumping, Falling, Rolling, Diving, Hit } from './playerStates.js' 
 
 export class Player{
     constructor(game){
@@ -24,7 +24,7 @@ export class Player{
         this.vSpeed=0;
         this.mass=1;
 
-        this.states=[new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game)];
+        this.states=[new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game), new Diving(this.game), new Hit(this.game)];
         
 
     }
@@ -85,10 +85,13 @@ export class Player{
                 && enemy.y+enemy.height>this.y                
             ){
                 enemy.markedForDeletion=true;
+                if(this.currentState===this.states[4] ||
+                    this.currentState===this.states[5]){
                 this.game.score++;
-            }
-            else{
-
+                    }
+                    else{
+                        this.setState(6, 0);
+                    }
             }
         });
     }

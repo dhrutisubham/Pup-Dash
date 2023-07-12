@@ -37,7 +37,7 @@ window.addEventListener('load', function(){
             this.score=0;
             this.fontColor='#000000DF';
 
-            this.debug=true;
+            this.debug=false;
 
             this.player.currentState=this.player.states[0];
             this.player.currentState.enter();

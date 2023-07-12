@@ -26,7 +26,7 @@ class Enemy{
             context.strokeRect(this.x, this.y, this.width, this.height);
         }
 
-        context.drawImage(this.image, this.frameX*this.width, 0, this.width, this.height, this.x, this.y, this.width*this.size, this.height*this.size);
+        context.drawImage(this.image, this.frameX*this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
     }
 }
 
@@ -60,14 +60,15 @@ export class GroundEnemy extends Enemy{
     constructor(game){
         super();
         this.game=game;
-        
+        this.width=60;
+        this.height=87;
         this.x=this.game.width;
         this.y=this.game.height-this.game.groundMargin-this.height;
         this.image=enemyPlant;
         this.speedX=0;
         this.speedY=0;
         this.maxFrame=2;
-        this.size=1;
+        this.size=2;
     }
     update(deltaTime){
         super.update(deltaTime);

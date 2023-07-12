@@ -30,6 +30,7 @@ window.addEventListener('load', function(){
             this.enemyInterval=1000;
 
             this.particles=[];
+            this.collisions=[];
 
             this.speed=0;
             this.maxSpeed=3;
@@ -77,6 +78,17 @@ window.addEventListener('load', function(){
             if(this.particles.length>this.maxParticles){
                 this.particles=this.particles.slice(0, this.maxParticles);
             }
+
+            //collisions
+            this.collisions.forEach((enemy,index)=>{
+                enemy.update(deltaTime);
+                if(enemy.markedForDeletion){
+                    this.collisions.splice(index,1);
+                }
+            });
+            console.log(this.particles);
+            console.log(this.enemies);
+            console.log(this.collisions);
         }
         draw(context){
             this.bg.draw(context);
@@ -88,6 +100,10 @@ window.addEventListener('load', function(){
 
             this.particles.forEach(particle=>{
                 particle.draw(context);
+            });
+
+            this.collisions.forEach(collision=>{
+                collision.draw(context);
             });
 
             this.UI.draw(context);

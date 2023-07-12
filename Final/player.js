@@ -1,5 +1,6 @@
 /** @type {HTMLCanvasElement} */
 import { Sitting, Running, Jumping, Falling, Rolling, Diving, Hit } from './playerStates.js' 
+import { CollisionAnimation } from './collisionAnimation.js';
 
 export class Player{
     constructor(game){
@@ -88,6 +89,7 @@ export class Player{
                 if(this.currentState===this.states[4] ||
                     this.currentState===this.states[5]){
                 this.game.score++;
+                this.game.collisions.unshift(new CollisionAnimation(this.game, enemy.x+enemy.width*0.5, enemy.y+enemy.height*0.5));
                     }
                     else{
                         this.setState(6, 0);

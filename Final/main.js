@@ -16,14 +16,14 @@ window.addEventListener('load', function(){
 
     class Game{
         constructor(width, height){
+            
             this.width=width;
             this.height=height;
             this.groundMargin=80;
 
-            this.bg=new Background(this);
-            this.player=new Player(this);
-            this.input=new InputHandler(this);
-            this.UI=new UI(this);
+            this.time=0;
+            this.maxTime=200000;
+            this.gameOver=false;
 
             this.enemies=[];
             this.enemyTimer=0;
@@ -39,16 +39,23 @@ window.addEventListener('load', function(){
             this.fontColor='#000000DF';
 
             this.debug=false;
+            this.maxParticles=50;            
+
+            this.bg=new Background(this);
+            this.player=new Player(this);
+            this.input=new InputHandler(this);
+            this.UI=new UI(this);
 
             this.player.currentState=this.player.states[0];
             this.player.currentState.enter();
 
-            this.maxParticles=50;
-            
-
         }
 
         update(deltaTime){
+            this.time+=deltaTime;
+            console.log(this.time);
+            if(this.time>this.maxTime) this.gameOver=true;
+
             this.bg.update();
             this.player.update(this.input.keys, deltaTime);
 
@@ -129,8 +136,12 @@ window.addEventListener('load', function(){
         game.update(timeDiff);
         game.draw(ctx);
         
+        if(!game.gameOver){
+            requestAnimationFrame(animate);
+        }
+        else{
 
-        requestAnimationFrame(animate);
+        }
     }
     animate(0);
 

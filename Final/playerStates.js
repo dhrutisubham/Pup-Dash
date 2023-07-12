@@ -31,14 +31,14 @@ export class Sitting extends State{
 
     }
     handleInput(input){
-        if(input.includes('ArrowLeft') 
-        || input.includes('ArrowRight')){
+        if(input.includes('ArrowLeft') || input.includes('a') 
+        || input.includes('ArrowRight') || input.includes('d')){
             this.game.player.setState(states.RUNNING, 1);
         }
         else if(input.includes('Enter') && this.game.player.onGround()){
             this.game.player.setState(states.ROLLING, 2);
         }
-        else if(input.includes('ArrowUp')){
+        else if(input.includes('ArrowUp') || input.includes('w')){
             this.game.player.setState(states.RUNNING, 1);
         }
     }
@@ -57,10 +57,10 @@ export class Running extends State{
     }
     handleInput(input){
         this.game.particles.unshift(new Dust(this.game, this.game.player.x, this.game.player.y));
-        if(input.includes('ArrowDown')){
+        if(input.includes('ArrowDown') || input.includes('s')){
             this.game.player.setState(states.SITTING, 0);
         }
-        else if(input.includes('ArrowUp')){
+        else if(input.includes('ArrowUp') || input.includes('w')){
             this.game.player.setState(states.JUMPING, 1);
         }
         else if(input.includes('Enter') ){
@@ -88,7 +88,7 @@ export class Jumping extends State{
         else if(input.includes('Enter')){
             this.game.player.setState(states.ROLLING, 2);
         }
-        else if(input.includes('ArrowDown')){
+        else if(input.includes('ArrowDown') || input.includes('s')){
             this.game.player.setState(states.DIVING, 0);
         }
         
@@ -109,7 +109,7 @@ export class Falling extends State{
         if(this.game.player.onGround()){
             this.game.player.setState(states.RUNNING, 1);
         }
-        else if(input.includes('ArrowDown')){
+        else if(input.includes('ArrowDown') || input.includes('s')){
             this.game.player.setState(states.DIVING, 0);
         }
     }
@@ -128,7 +128,7 @@ export class Rolling extends State{
     handleInput(input){
         this.game.particles.unshift(new Fire(this.game, this.game.player.x, this.game.player.y));
 
-        if(input.includes('ArrowUp') && input.includes('Enter') && this.game.player.onGround()){
+        if(input.includes('ArrowUp') || input.includes('w') && input.includes('Enter') && this.game.player.onGround()){
             this.game.player.vSpeed=-25;
         }
         else if(input.includes('Enter') && this.game.player.onGround()){

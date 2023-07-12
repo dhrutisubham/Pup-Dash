@@ -13,6 +13,9 @@ window.addEventListener('load', function(){
     const ctx= canvas.getContext('2d');
     canvas.width=500;
     canvas.height=500;
+    let startGame=false;
+
+    
 
     class Game{
         constructor(width, height){
@@ -22,7 +25,7 @@ window.addEventListener('load', function(){
             this.groundMargin=50;
 
             this.time=0;
-            this.maxTime=20000;
+            this.maxTime=30000;
             this.gameOver=false;
 
             this.enemies=[];
@@ -133,7 +136,17 @@ window.addEventListener('load', function(){
             this.enemies.push(new FlyingEnemy(this));
         }
     }
-    const game=new Game(canvas.width, canvas.height);
+
+    const landingPage=document.getElementById('landingPage');
+    let game=new Game(canvas.width, canvas.height);
+
+    window.addEventListener('keydown', e=>{
+        if((e.key==='Enter' && (!startGame || game.gameOver))){
+            startGame=true;
+            game=new Game(canvas.width, canvas.height);
+            animate(0);
+        } 
+    });
 
     let lastAnimate=0;
 
@@ -142,8 +155,14 @@ window.addEventListener('load', function(){
         lastAnimate=timeStamp;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if(startGame){
         game.update(timeDiff);
         game.draw(ctx);
+        }
+        else{
+            ctx.drawImage(landingPage, 0, 0);
+        }
         
         if(!game.gameOver){
             requestAnimationFrame(animate);

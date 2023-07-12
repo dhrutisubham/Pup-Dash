@@ -4,6 +4,7 @@ export class UI{
         this.fontSize=30;
         this.fontFamily='Staatliches';
         this.lives=lives;
+        console.log(this.game);
 
     }
     draw(context){

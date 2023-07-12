@@ -141,10 +141,13 @@ window.addEventListener('load', function(){
     let game=new Game(canvas.width, canvas.height);
 
     window.addEventListener('keydown', e=>{
-        if((e.key==='Enter' && (!startGame || game.gameOver))){
+        if((e.key==='Enter')){
+            if(!startGame){
             startGame=true;
-            game=new Game(canvas.width, canvas.height);
-            animate(0);
+            }
+            else if(game.gameOver){
+                location.reload();
+            }
         } 
     });
 
@@ -155,6 +158,7 @@ window.addEventListener('load', function(){
         lastAnimate=timeStamp;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 
         if(startGame){
         game.update(timeDiff);

@@ -31,6 +31,7 @@ window.addEventListener('load', function(){
 
             this.particles=[];
             this.collisions=[];
+            this.floatingMessages=[];
 
             this.speed=0;
             this.maxSpeed=3;
@@ -94,6 +95,13 @@ window.addEventListener('load', function(){
                     this.collisions.splice(index,1);
                 }
             });
+
+            //floatingMessages
+            this.floatingMessages.forEach((enemy,index)=>{
+                enemy.update();
+            });
+            this.floatingMessages=this.floatingMessages.filter(message=>!message.markedForDeletion);
+
         }
         draw(context){
             this.bg.draw(context);
@@ -111,6 +119,9 @@ window.addEventListener('load', function(){
                 collision.draw(context);
             });
 
+            this.floatingMessages.forEach(collision=>{
+                collision.draw(context);
+            });
             this.UI.draw(context);
         }
         addEnemy(){

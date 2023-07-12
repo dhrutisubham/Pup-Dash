@@ -1,6 +1,7 @@
 /** @type {HTMLCanvasElement} */
 import { Sitting, Running, Jumping, Falling, Rolling, Diving, Hit } from './playerStates.js' 
 import { CollisionAnimation } from './collisionAnimation.js';
+import { FloatingMessages } from './floatingMessages.js';
 
 export class Player{
     constructor(game){
@@ -87,19 +88,20 @@ export class Player{
             ){
                 this.game.collisions.unshift(new CollisionAnimation(this.game, enemy.x+enemy.width*0.5, enemy.y+enemy.height*0.5));
                 enemy.markedForDeletion=true;
-                if(this.currentState===this.states[4] ||
-                    this.currentState===this.states[5]){
-                this.game.score++;
-                    }
-                    else{
-                        this.setState(6, 0);
-                        
-                        this.game.totalLives--;
-                        if(!this.game.totalLives){
-                            this.game.gameOver=true;
-                        }
-                        
-                    }
+                if(this.currentState===this.states[4] || this.currentState===this.states[5])
+                {
+                    this.game.score++;
+                    this.game.floatingMessages.unshift(new FloatingMessages('+1', enemy.x+enemy.width*0.5, enemy.y+enemy.height*0.5, 20, 50));
+                    console.log(this.game.floatingMessages);
+                }
+                else{
+                    this.setState(6, 0);
+                    
+                    this.game.totalLives--;
+                    if(!this.game.totalLives){
+                        this.game.gameOver=true;
+                    } 
+                }
             }
         });
     }

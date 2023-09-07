@@ -27,11 +27,23 @@ body{
     top: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+    overflow: hidden;
     
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 12px;
+}
+
+#quote{
+    width: 20%;
+    height: auto;
+    position: fixed;
+    
+    left: 60%;
+    top: -1%;
+    z-index: -1;
+    opacity: 0.6;
 }
 
 #title{
@@ -55,7 +67,7 @@ body{
 
 }
 
-img{
+#pfp{
     width: 30px;
     height: 30px;
     border: #A482C9 solid 2px;
